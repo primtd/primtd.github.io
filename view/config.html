@@ -21,7 +21,7 @@
 
         <div data-role="fieldcontain">
           <label for="dep-id">Destination ID(s):</label>
-          <textarea cols="40" rows="8" name="dep-id" id="dep-id" pattern="[0-9,]+"></textarea>
+          <textarea cols="40" rows="8" name="dep-id" id="dep-id"></textarea>
         </div>
 
         <div class="ui-body ui-body-b">
@@ -34,6 +34,29 @@
       </div>
     </div>
     <script>
+	var pattern = "[0-9,]+";
+
+	$("#dep-id").keydown(function(e){
+		 var theEvent = event || window.event;
+		 var key = theEvent.keyCode || theEvent.which;
+			// Allow: backspace, delete, tab, escape, and enter
+			if ( key == 46 || key == 8 || key == 27 || key == 188 ||
+				 // Allow: Ctrl+A
+				(key == 65 && theEvent.ctrlKey === true) || 
+				 // Allow: home, end, left, right
+				(key >= 35 && key <= 39)) {
+					 // let it happen, don't do anything
+					 return;
+			}
+			else {
+				// Ensure that it is a number and stop the keypress
+				if (theEvent.shiftKey || (key < 48 || key > 57) && (key < 96 || key > 105 )) {
+					theEvent.preventDefault(); 
+				}  
+
+			}
+	});
+
       function saveOptions() {
 
 		var lines = $("#dep-id").val().split(/[\s,]+/);
