@@ -21,7 +21,7 @@
 
         <div data-role="fieldcontain">
           <label for="dep-id">Destination ID(s):</label>
-          <textarea cols="40" rows="8" name="dep-id" id="dep-id"></textarea>
+          <textarea cols="40" rows="8" name="dep-id" id="dep-id" pattern="[0-9,]+"></textarea>
         </div>
 
         <div class="ui-body ui-body-b">
@@ -34,18 +34,6 @@
       </div>
     </div>
     <script>
-
-	$("#dep-id").keypress(function(e) {
-   	 var a = [];
-   	 var k = e.which;
-    
-   	 for (i = 48; i < 58; i++)
-   	     a.push(i);
-    
-   	 if (!(a.indexOf(k)>=0))
-   	     e.preventDefault();
-	});
-
       function saveOptions() {
 
 		var lines = $("#dep-id").val().split(/[\s,]+/);
